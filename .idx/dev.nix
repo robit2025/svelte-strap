@@ -5,6 +5,16 @@
   channel = "stable-24.05"; # or "unstable"
   # Use https://search.nixos.org/packages to find packages
   packages = [
+    (pkgs.php82.buildEnv {
+      extensions = ({enabled, all}: enabled ++ (with all; [
+        mbstring
+        iconv
+        zip
+        pdo
+      ]));
+    })
+    pkgs.php82Packages.composer
+    pkgs.nodejs_20
     # pkgs.go
     # pkgs.python311
     # pkgs.python311Packages.pip
